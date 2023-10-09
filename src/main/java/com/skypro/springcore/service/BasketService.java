@@ -1,21 +1,26 @@
 package com.skypro.springcore.service;
 
+import com.skypro.springcore.model.Basket;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BasketService {
 
-    public List<Integer> items = new ArrayList<>();
+    private final Basket basket;
 
-    public List<Integer> add(List<Integer> ids) {
-        items.addAll(ids);
-        return ids;
+    public BasketService(Basket basket) {
+        this.basket = basket;
     }
 
-    public List<Integer> get() {
-        return items;
+    public List<Integer> add(List<Integer> ids) {
+        return basket.add(ids);
+    }
+
+    public Map<Integer, Integer> get() {
+        return basket.get();
     }
 }
